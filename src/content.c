@@ -54,20 +54,27 @@ void addContent(char *username){
     printf("Content added (ID: %d)\n", id);
 }
 
-void listContent(){
-    FILE *fp = fopen(CONTENT_FILE,"r");
-    if(!fp){
-        printf("Content file not found!\n");
+void listContent() {
+    FILE *fp = fopen(CONTENT_FILE, "r");
+    if (!fp) {
+        printf("No content found.\n");
         return;
     }
+
     char id[10], title[100], body[500], status[20], slug[120];
     printf("\n--- Content List ---\n");
     while (fscanf(fp, "%9[^|]|%99[^|]|%499[^|]|%19[^|]|%119[^\n]\n",
                   id, title, body, status, slug) == 5) {
-        printf("[%s] %s (%s) -> %s\n", id, title, status, slug);
+        printf("\nID: %s\n", id);
+        printf("Title: %s\n", title);
+        printf("Body: %s\n", body);
+        printf("Status: %s\n", status);
+        printf("Slug: %s\n", slug);
+        printf("-----------------------------\n");
     }
     fclose(fp);
 }
+
 
 void editContent(){
     int id, found = 0;
@@ -107,7 +114,6 @@ void editContent(){
     if (found) printf("Content updated!\n");
     else printf("Content ID not found.\n");
 }
-
 void deleteContent() {
     int id, found = 0;
     printf("Enter content ID to delete: ");
@@ -139,3 +145,4 @@ void deleteContent() {
     if (found) printf("Content deleted!\n");
     else printf("Content ID not found.\n");
 }
+
