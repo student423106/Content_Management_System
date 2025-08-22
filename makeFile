@@ -1,0 +1,9 @@
+CC = gcc
+CFLAGS = -Wall -I./src
+OBJ = src/main.o src/auth.o src/content.o src/media.o src/utils.o
+
+cms: $(OBJ)
+	$(CC) $(OBJ) -o build/cms
+
+clean:
+	rm -f src/*.o build/cms
